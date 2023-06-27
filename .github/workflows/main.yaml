@@ -1,0 +1,23 @@
+name: CI # 工作流名称
+
+on: # 触发条件
+  push:
+    branches:
+      - master # 当代码提交到 master 分支时触发
+
+jobs: # 工作流中的任务
+  run-tests: # 运行单元测试
+    runs-on: ubuntu-latest # 运行环境
+    strategy: # 任务的执行策略
+      matrix:
+        node-version: [16]
+    steps: # 执行步骤
+      - uses: actions/checkout@v3 # 这是一个 GitHub Action，用于将代码 checkout 到虚拟机中
+      - uses: actions/setup-node@v3 # 这是一个 GitHub Action，用于安装指定版本的 node
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org
+      - name: Install dependencies 📦️ # 安装依赖
+        run: npm install
+      - name: test # 运行单元测试
+        run: npm run test:coverage
