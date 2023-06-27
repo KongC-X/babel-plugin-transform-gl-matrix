@@ -3,7 +3,7 @@ name: CI # 工作流名称
 on: # 触发条件
   push:
     branches:
-      - master # 当代码提交到 master 分支时触发
+      - main # 当代码提交到 main 分支时触发
 
 jobs: # 工作流中的任务
   run-tests: # 运行单元测试
