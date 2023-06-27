@@ -19,5 +19,10 @@ jobs: # 工作流中的任务
           registry-url: https://registry.npmjs.org
       - name: Install dependencies 📦️ # 安装依赖
         run: npm install
-      - name: test # 运行单元测试
-        run: npm run test:coverage
+      - name: Code Climate Coverage Action
+        uses: paambaati/codeclimate-action@v3.2.0 # 将测试覆盖率的信息上传到 Code Climate 中
+        env:
+          CC_TEST_REPORTER_ID: ba8909ffa1f354bfc4629fa15a1fb1bd3c2a322e3e3a4d108c1acc39ba83ba71 # 这里的 CC_TEST_REPORTER_ID 是 Code Climate 的一个 token，需要在 Code Climate 的 Repo Settings 页面中，找到 Test Coverage，然后点击 Copy Code Climate Test Reporter ID
+        with:
+          coverageCommand: npm run test:coverage
+          debug: true
